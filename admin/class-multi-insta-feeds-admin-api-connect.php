@@ -11,8 +11,6 @@ class Multi_Insta_Feeds_API_Connect {
         'redirect_uri' => 'https://localhost/wp-admin/index.php'
     );
 
-    private $response;
-
     function retrieve_access_token(){
         $accounts = new Multi_Insta_Feeds_Accounts;
         
@@ -80,10 +78,4 @@ class Multi_Insta_Feeds_API_Connect {
             return $media_response['data'];
         }
     }
-
-    function get_image_url($user_id){
-        $media_list = $this -> get_media_list($user_id);
-        return $media_list[0]['media_url'];
-    }
-
 }
