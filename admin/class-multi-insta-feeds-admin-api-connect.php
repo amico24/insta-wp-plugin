@@ -27,7 +27,7 @@ class Multi_Insta_Feeds_API_Connect {
         //i only found out later that theres a function specifically for this but it messed up the code so im not using it lmao
         $response = json_decode($json_response['body'], true);
 
-        $json_token_response = wp_remote_get('https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=0704eaf67e4db60ca19275c7b27548c3&access_token='.$response['access_token']);
+        $json_token_response = wp_remote_get('https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret='.$this->args['client_secret'].'&access_token='.$response['access_token']);
 			
         $token_response = json_decode($json_token_response['body'], true);
 
