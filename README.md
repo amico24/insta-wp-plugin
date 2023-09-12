@@ -62,7 +62,6 @@ First version `1.0.0` is the first working version of the plugin. It connects to
     Copy the shortcode under the group and paste into the page where you want to display the recent posts of the users in that group
 
 ## Known Issues:
-- The error handling, especially for instagram API connection, is really bad. Need a better way to catch errors from API requests and display them on the dashboard.
 - Literally zero css on this. Everything is default html styling.
 - Doing certain tasks like deleting accounts doesnt immediately update the rest of the plugin on the changes until the page is refreshed. Sometimes this leads to warnings from wordpress on the page or certain things being displayed incorrectly, which fixes itself once refreshed.
 - None of the functions or variables have proper summaries commented in (idk what theyre called its the thing thats commented before the function or variable that describes what it does and what params it needs)
