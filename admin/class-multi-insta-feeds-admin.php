@@ -102,6 +102,10 @@ class Multi_Insta_Feeds_Admin {
 
 	}
 
+	/**
+	 * initializes helper classes
+	 * @return void
+	 */
 	public function init_admin_classes(){
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-accounts.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-api-connect.php';
@@ -110,6 +114,12 @@ class Multi_Insta_Feeds_Admin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-errors.php';
 	}
  
+	/**
+	 * Creates html for displaying recent Instagram posts
+	 * @param mixed $atts
+	 * @param mixed $content
+	 * @return string
+	 */
 	public function feed_display($atts, $content = ""){
 		$a = shortcode_atts( array(
 			'group' => ''					
@@ -168,13 +178,20 @@ class Multi_Insta_Feeds_Admin {
 
 	}
 
-	//adds 'code' to the list of valid url parameters
+	/**
+	 * Adds 'code' to the list of valid url parameters
+	 * @param mixed $qvars
+	 * @return mixed
+	 */
 	public function themeslug_query_vars( $qvars ) {
 		$qvars[] = 'code';
 		return $qvars;
 	}
 
-	//calls instagram api if code string query is found
+	/**
+	 * Calls instagram api if code string query is found
+	 * @return void
+	 */
 	public function get_auth_code(){
 		if(isset($_GET['code'])){
 			$api = new Multi_Insta_Feeds_API_Connect;
