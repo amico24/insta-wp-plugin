@@ -14,12 +14,9 @@
 
 namespace MIF\Admin;
 
-//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-multi-insta-fields-admin-accounts.php';
 $accounts = new Multi_Insta_Feeds_Accounts;
 $api = new Multi_Insta_Feeds_API_Connect;
 $groups = new Multi_Insta_Feeds_Groups;
-//$raw_user_data = get_option('mif_insta_response', '');
-//$accounts -> add_account(get_option('mif_insta_response', '')['user_id'], get_option('mif_insta_response', '')['access_token']);
 
 ?>
 <!-- 
@@ -39,8 +36,7 @@ $groups = new Multi_Insta_Feeds_Groups;
             <th>Refresh Token</th>
         </tr>
         <?php $keys = $accounts->get_key_list() ?>
-        <?php //for($acc=0; $acc < $accounts->get_total_accounts(); $acc++):
-        foreach ($keys as $user_id): ?>
+        <?php foreach ($keys as $user_id): ?>
 
             <tr>
 
