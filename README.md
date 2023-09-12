@@ -54,9 +54,11 @@ First version `1.0.0` is the first working version of the plugin. It connects to
     Do this for all needed accounts (you need to log in for every account you add)
 
 4. Create groups
+   
     Go back to the settings page for `Multi Insta Feed` and select the accounts you want to add in a group, then click the `Create Group with Selected Accounts` button. The group with the selected users should show up in the plugin dashboard
 
 5. Use shortcode
+   
     Copy the shortcode under the group and paste into the page where you want to display the recent posts of the users in that group
 
 ## Known Issues:
