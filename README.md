@@ -8,6 +8,8 @@ Admin pages were made mostly using the guide from this tutorial: https://blog.wp
 The instagram app permissions I used for this only use the instagram basic display api instead of the graph api
 
 First version `1.0.0` is the first working version of the plugin. It connects to the instagram api and is able to display posts, but is very bare bones and may need a lot of reworking.
+
+Also `multi-insta-feeds-admin-functions.php` doesnt actually do anything lol i made it to try and have a general functions file to put constants and other stuff but i couldnt figure out how to get it to work with the boilerplate
  
 ## Instructions for Use:
 1. Download files and store in plugin directory in the wordpress folder: `...\wordpress\wp-content\plugins`
@@ -60,12 +62,4 @@ First version `1.0.0` is the first working version of the plugin. It connects to
 5. Use shortcode
    
     Copy the shortcode under the group and paste into the page where you want to display the recent posts of the users in that group
-
-## Known Issues:
-- The error handling, especially for instagram API connection, is really bad. Need a better way to catch errors from API requests and display them on the dashboard.
-- Literally zero css on this. Everything is default html styling.
-- Doing certain tasks like deleting accounts doesnt immediately update the rest of the plugin on the changes until the page is refreshed. Sometimes this leads to warnings from wordpress on the page or certain things being displayed incorrectly, which fixes itself once refreshed.
-- None of the functions or variables have proper summaries commented in (idk what theyre called its the thing thats commented before the function or variable that describes what it does and what params it needs)
-- Actually all the comments in general should probably be redone
-- `multi-insta-feeds-admin-functions.php` doesnt actually do anything lol i made it to try and have a general functions file to put constants and other stuff but i couldnt figure out how to get it to work with the boilerplate
 
