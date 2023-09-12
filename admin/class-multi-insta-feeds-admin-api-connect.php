@@ -25,23 +25,26 @@ class Multi_Insta_Feeds_API_Connect {
         //i only found out later that theres a function specifically for this but it messed up the code so im not using it lmao
         $response = json_decode($json_response['body'], true);
 
-        $json_token_response = wp_remote_get('https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret='.$this->args['client_secret'].'&access_token='.$response['access_token']);
-			
-        $token_response = json_decode($json_token_response['body'], true);
+        
 
         //this error checking is not it dawg i need to fix this later
-        if (array_key_exists('error', $response)){
-            update_option('mif_error', $response);
-        } elseif (array_key_exists('error', $token_response)){
-            update_option('mif_error', $token_response);
+        if (!array_key_exists('access_token', $response)){
+            new Multi_Insta_Feeds_Errors($response['error_message'], 'notice-error');
         } else {
-            update_option('mif_error', null);
+            $json_token_response = wp_remote_get('https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret='.$this->args['client_secret'].'&access_token='.$response['access_token']);
+                        
+            $token_response = json_decode($json_token_response['body'], true);
 
-            //adding new account to list
-            $accounts -> add_account($response['user_id'], $token_response['access_token'], time(), $accounts -> get_account_username($token_response['access_token']));
+            if (!array_key_exists('access_token', $token_response)){
+                new Multi_Insta_Feeds_Errors($token_response['error_message'], 'notice-error');
+            } else {
+                //adding new account to list
+                $accounts -> add_account($response['user_id'], $token_response['access_token'], time(), $accounts -> get_account_username($token_response['access_token']));
+                
+                //updating options to include entire account list
+                update_option('mif_insta_response', $accounts -> get_account_list());
+            }
             
-            //updating options to include entire account list
-            update_option('mif_insta_response', $accounts -> get_account_list());
         }
 
     }
@@ -71,8 +74,8 @@ class Multi_Insta_Feeds_API_Connect {
 
         
         $media_response = json_decode($json_media_response['body'], true);
-        if (array_key_exists('error', $media_response)){
-            update_option('mif_error', $media_response);
+        if (!array_key_exists('data', $media_response)){
+            new Multi_Insta_Feeds_Errors($media_response['error_message'], 'notice-error');
             return 'error';
         }else {
             return $media_response['data'];

@@ -58,7 +58,6 @@ class Multi_Insta_Feeds_Admin {
 		add_action('admin_menu', array( $this, 'addPluginAdminMenu' ));
 		add_action('admin_init', array( $this, 'registerAndBuildFields' ));
 		add_action('admin_init', array($this, 'get_auth_code'));
-		add_action( 'admin_notices', array($this, 'admin_warning'));
 		add_shortcode( 'feed_display', array( $this, 'feed_display' ));
 
 	}
@@ -108,6 +107,7 @@ class Multi_Insta_Feeds_Admin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-api-connect.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\multi-insta-feeds-admin-functions.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-groups.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin\class-multi-insta-feeds-admin-errors.php';
 	}
  
 	public function feed_display($atts, $content = ""){
@@ -172,22 +172,6 @@ class Multi_Insta_Feeds_Admin {
 	public function themeslug_query_vars( $qvars ) {
 		$qvars[] = 'code';
 		return $qvars;
-	}
-
-	//this is supposed to be for error checking but its kinda bad 
-	function admin_warning($messages) {
-
-		$error = get_option('mif_error', null);
-		if(!empty($error)){
-			$error_string = implode(' | ',$error['error']);
-		
-			$notice = <<<EOT
-			<div class="notice notice-error">
-				<p>Error: $error_string</p>
-			</div>
-			EOT;
-			echo $notice;
-		}
 	}
 
 	//calls instagram api if code string query is found
