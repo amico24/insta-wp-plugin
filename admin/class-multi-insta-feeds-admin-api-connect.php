@@ -3,6 +3,10 @@
 namespace MIF\Admin;
 class Multi_Insta_Feeds_API_Connect {
 
+    /**
+     * Instagram API access parameters
+     * @var array
+     */
     protected $args = array(
         'client_id' => '192229297054716',
         'client_secret' => '0704eaf67e4db60ca19275c7b27548c3',
@@ -11,6 +15,10 @@ class Multi_Insta_Feeds_API_Connect {
         'redirect_uri' => 'https://localhost/wp-admin/index.php'
     );
 
+    /**
+     * Gets long lived access token assuming an auth code is present in query string
+     * @return void
+     */
     function retrieve_access_token(){
         $accounts = new Multi_Insta_Feeds_Accounts;
         
@@ -49,6 +57,11 @@ class Multi_Insta_Feeds_API_Connect {
 
     }
 
+    /**
+     * Refreshes long lived access token
+     * @param string $user_id
+     * @return void
+     */
     function refresh_access_token($user_id){
         $accounts = new Multi_Insta_Feeds_Accounts;
         $current_acc = $accounts->get_account($user_id);
@@ -67,6 +80,11 @@ class Multi_Insta_Feeds_API_Connect {
 
     }
 
+    /**
+     * Gets array of data on every post in a users account
+     * @param string $user_id
+     * @return mixed
+     */
     function get_media_list($user_id){
         $accounts = new Multi_Insta_Feeds_Accounts;
         $current_acc = $accounts->get_account($user_id);
