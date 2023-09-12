@@ -109,7 +109,6 @@ class Multi_Insta_Feeds_Accounts {
         }
     }
 
-    
     /**
      * Returns array of user id's which are used as array keys for each account
      * @return array
