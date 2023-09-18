@@ -1,34 +1,44 @@
-(function( $ ) {
-	'use strict';
+//Leftover javascript code for facebook login integration. since i dont have access needed for fb login i cant actually use this, but ill just leave this here just in case
 
-	/**
-	 * All of the code for your admin-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+        testAPI();
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+        document.getElementById('status').innerHTML = 'Please log ' +
+            'into this webpage.';
+    }
+}
 
-})( jQuery );
+
+function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function (response) {   // See the onlogin handler
+        statusChangeCallback(response);
+    });
+}
+
+
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '1041814846813256',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v18.0'
+    });
+
+    FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+    });
+};
+
+function testAPI() {       // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
 
 

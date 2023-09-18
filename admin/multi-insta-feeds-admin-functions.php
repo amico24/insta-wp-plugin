@@ -4,23 +4,23 @@
 //ill deal w this later
 
 function get_client_id(){
-    return '192229297054716';
+    return '';
 }
 
 function get_client_secret(){
-    return '0704eaf67e4db60ca19275c7b27548c3';
+    return '';
 }
 
 function get_redirect_uri(){
-    return 'https://localhost/wp-admin/index.php';
+    return '';
 }
 
 function get_db_accounts(){
-    return 'mif_insta_response';
+    return '';
 }
 
 function get_db_debugger(){
-    return 'mif_error';
+    return '';
 }
 
 function is_insta_api_error(){

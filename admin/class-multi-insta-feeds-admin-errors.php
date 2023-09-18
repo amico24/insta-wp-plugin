@@ -27,7 +27,8 @@ class Multi_Insta_Feeds_Errors{
 		$this->message = $message;
         $this -> error_class = $error_class;
 
-		add_action( 'admin_notices', array( $this, 'render' ) );
+		add_action( 'admin_notices', array( $this, 'render' ), );
+		do_action('admin_notices');
 	}
 
 	/**
@@ -36,6 +37,6 @@ class Multi_Insta_Feeds_Errors{
 	 * @return void
 	 */
 	public function render() {
-		printf( '<div class="notice %s is-dismissible"><p>Notice: %s</p></div>',esc_html($this -> error_class), esc_html( $this->message ) );
+		printf( '<div class="notice %s is-dismissible"><p>%s</p></div>',esc_html($this -> error_class), esc_html( $this->message ) );
 	}
 }
