@@ -18,7 +18,7 @@ Also `multi-insta-feeds-admin-functions.php` doesnt actually do anything lol i m
 ## Instructions for Use:
 1. Download files and store in plugin directory in the wordpress folder: `...\wordpress\wp-content\plugins`
 
-2. Set up a facebook app with Instagram Graph API product
+2. Set up a business facebook app with Instagram Graph API product
 
    I'm not sure if Facebook Login is needed here but if you can't get the permissiosn needed in step 4 then you should probably add it
 
