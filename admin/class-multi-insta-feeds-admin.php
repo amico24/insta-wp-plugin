@@ -122,6 +122,7 @@ class Multi_Insta_Feeds_Admin {
 			), $atts );
 		$graph_api = new Multi_Insta_Feeds_Graph_API;
 		$graph_groups = new Multi_Insta_Feeds_Graph_Groups;
+		$accounts = new Multi_Insta_Feeds_Graph_Accounts;
 		$post_list = array();
 
 		//check if group exists
@@ -132,7 +133,7 @@ class Multi_Insta_Feeds_Admin {
 		} else {
 			//put 5 most recent posts on every account on $post_list
 			foreach($graph_groups->get_user_list($a['group']) as $account) {
-				array_push($post_list,$graph_api->get_media_list($account));
+				array_push($post_list, $accounts->get_media_list($account));
 			}
 			//flatten array
 			$post_list = array_merge(...$post_list);

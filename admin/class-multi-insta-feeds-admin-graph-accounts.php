@@ -7,13 +7,13 @@ class Multi_Insta_Feeds_Graph_Accounts {
      * Usernames of business accounts
      * @var array
      */
-    private $accounts;
+    private $accounts = array();
 
     /**
      * Name of database entry that stores connected account list
      * @var string
      */
-    private $db_accounts = 'mif_business_accounts';
+    private $db_accounts = 'mif_accounts_test';
 
     /**
      * Grabs already connected accounts from database.
@@ -26,15 +26,26 @@ class Multi_Insta_Feeds_Graph_Accounts {
     }
 
     /**
-     * Adds an account username to database if it isn't already there
+     * Adds an account data to database if it isn't already there
      * @param mixed $username Username of account to be added
      * @return void
      */
     function add_account($username){
+        /*
         if(!in_array($username, $this -> accounts)){
             $this -> accounts[] = $username;
             update_option($this -> db_accounts, $this -> accounts);
+        }*/
+
+        if(!array_key_exists($username, $this -> accounts)){
+            $api = new Multi_Insta_Feeds_Graph_API;
+            $acc_data = $api -> retrieve_full_acc_data($username);
+            $this -> accounts[$username] =  $acc_data;
+            update_option($this -> db_accounts, $this -> accounts);
+            //var_dump($this -> accounts);
+            //die();
         }
+
     }
 
     /**
@@ -45,7 +56,7 @@ class Multi_Insta_Feeds_Graph_Accounts {
         if(empty($this -> accounts)){
             return array();
         } else {
-            return $this -> accounts;
+            return array_keys($this -> accounts);
         }
     }
 
@@ -55,10 +66,33 @@ class Multi_Insta_Feeds_Graph_Accounts {
      * @return void
      */
     function delete_account($username){
-        if (($key = array_search($username, $this -> accounts)) !== false) {
-            unset($this -> accounts[$key]);
-            update_option($this -> db_accounts, $this -> accounts);
-        }
+        unset($this -> accounts[$username]);
+        update_option($this -> db_accounts, $this -> accounts);
     }
 
+    /**
+     * Returns array of media from specific account (only returns 5 most recent).
+     * @param mixed $username
+     * @return mixed
+     */
+    function get_media_list($username){
+        //var_dump($this -> accounts);
+        //die();
+        $raw_media_list = $this -> accounts[$username]['media']['data'];
+        $media_list = array_slice($raw_media_list, 0, 5);
+        return $media_list;
+    }
+
+    /**
+     * Refreshes every account saved to update according to changes in the account.
+     * Warning: Calling this makes the website lag a lot especially if there are a lot of accounts.
+     * idk if theres a better way to do this
+     * @return void
+     */
+    function refresh_accounts(){
+        foreach($this->accounts as $username => $account){
+            unset($this->accounts[$username]);
+            $this -> add_account($username);
+        }
+    }
 }

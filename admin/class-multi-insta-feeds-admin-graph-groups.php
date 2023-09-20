@@ -13,7 +13,7 @@ class Multi_Insta_Feeds_Graph_Groups{
      * Name of database entry that stores group list.
      * @var string
      */
-    private $db_groups = 'mif_business_groups';
+    private $db_groups = 'mif_groups_test';
 
     /**
      * Grabs already existing arrays from database. If database is empty, initializes the variable to an array to avoid errors.

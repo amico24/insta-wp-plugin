@@ -20,13 +20,13 @@ class Multi_Insta_Feeds_Graph_API{
      * Client ID of Facebook app
      * @var string
      */
-    private $client_id = 'sample_client_id';
+    private $client_id = '1695938317479097';
 
     /**
      * App secret of Facebook app
      * @var string
      */
-    private $app_secret = 'sample_app_secret';
+    private $app_secret = 'a8fa157edc5b93de14aca9deca215b5c';
 
     /**
      * Name of database entry that stores long-lived access token
@@ -122,24 +122,24 @@ class Multi_Insta_Feeds_Graph_API{
     }
 
     /**
-     * Returns array of media from specific account (only returns 5 most recent)
+     * Calls api and returns all required information from an account.
      * @param string $username
      * @return mixed
      */
-    function get_media_list($username){
-        $media_list_json = wp_remote_get('https://graph.facebook.com/v18.0/'.$this -> ig_user_id.'?fields=business_discovery.username('.$username.')%7Bmedia%7Bmedia_url%2Cid%2Cusername%2Ctimestamp%7D%7D&access_token='.$this -> access_token);
-        if(is_wp_error($media_list_json)){
-            var_dump($media_list_json -> get_error_message());
+    function retrieve_full_acc_data($username){
+        $acc_data_json = wp_remote_get('
+        https://graph.facebook.com/v18.0/'.$this -> ig_user_id.'?fields=business_discovery.username('.$username.')%7Busername%2Cname%2Cprofile_picture_url%2Cbiography%2Cmedia%7Bmedia_url%2Cid%2Cusername%2Ctimestamp%7D%7D&access_token='.$this -> access_token);
+        if(is_wp_error($acc_data_json)){
+            var_dump($acc_data_json -> get_error_message());
             die();
         }else{
-            $media_list = json_decode($media_list_json['body'], true);
-            if(array_key_exists('error', $media_list)){
-                return $media_list['error']['message'];
+            $acc_data = json_decode($acc_data_json['body'], true);
+            if(array_key_exists('error', $acc_data)){
+                new Multi_Insta_Feeds_Errors($acc_data['error']['message'], 'notice-error');
             } else {
-                $media_list = array_slice($media_list['business_discovery']['media']['data'],0,5);
-                return $media_list;
+                return $acc_data['business_discovery'];
             }
         }
-        
     }
+
 }

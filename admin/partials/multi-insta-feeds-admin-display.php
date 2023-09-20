@@ -48,6 +48,22 @@ $graph_groups = new Multi_Insta_Feeds_Graph_Groups;
         <?php endforeach ?>
     </table>
 
+    <br>
+
+    <form method="post">
+        <input type="hidden" name="refresh_accounts" id="refresh_accounts" value="1" />
+        <button type="submit"> Refresh Accounts </button>
+    </form>
+
+    <?php
+    if (isset($_POST['refresh_accounts'])) {
+        $graph_accounts->refresh_accounts();
+        unset($_POST['refresh_accounts']);
+        new Multi_Insta_Feeds_Errors('Accounts Refreshed.', 'notice-success');
+    }
+    ?>
+
+
     <hr>
 
     <h1>Groups:</h1>
