@@ -20,13 +20,13 @@ class Multi_Insta_Feeds_Graph_API{
      * Client ID of Facebook app
      * @var string
      */
-    private $client_id = 'sample';
+    private $client_id = '1695938317479097';
 
     /**
      * App secret of Facebook app
      * @var string
      */
-    private $app_secret = 'sample';
+    private $app_secret = 'a8fa157edc5b93de14aca9deca215b5c';
 
     /**
      * Name of database entry that stores long-lived access token
@@ -128,7 +128,7 @@ class Multi_Insta_Feeds_Graph_API{
      */
     function retrieve_full_acc_data($username){
         $acc_data_json = wp_remote_get('
-        https://graph.facebook.com/v18.0/'.$this -> ig_user_id.'?fields=business_discovery.username('.$username.')%7Busername%2Cname%2Cprofile_picture_url%2Cbiography%2Cmedia%7Bmedia_url%2Cid%2Cusername%2Ctimestamp%7D%7D&access_token='.$this -> access_token);
+        https://graph.facebook.com/v18.0/'.$this -> ig_user_id.'?fields=business_discovery.username('.$username.')%7Busername%2Cname%2Cprofile_picture_url%2Cbiography%2Cmedia%7Bmedia_url%2Cid%2Cusername%2Ctimestamp%2Cmedia_type%7D%7D&access_token='.$this -> access_token);
         if(is_wp_error($acc_data_json)){
             var_dump($acc_data_json -> get_error_message());
             die();

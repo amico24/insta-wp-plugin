@@ -13,7 +13,7 @@ class Multi_Insta_Feeds_Graph_Accounts {
      * Name of database entry that stores connected account list
      * @var string
      */
-    private $db_accounts = 'mif_accounts_test';
+    private $db_accounts = 'mif_accounts';
 
     /**
      * Grabs already connected accounts from database.
@@ -62,7 +62,7 @@ class Multi_Insta_Feeds_Graph_Accounts {
 
     /**
      * Deletes account from array and updates database
-     * @param mixed $username
+     * @param string $username
      * @return void
      */
     function delete_account($username){
@@ -72,7 +72,7 @@ class Multi_Insta_Feeds_Graph_Accounts {
 
     /**
      * Returns array of media from specific account (only returns 5 most recent).
-     * @param mixed $username
+     * @param string $username
      * @return mixed
      */
     function get_media_list($username){
@@ -81,6 +81,15 @@ class Multi_Insta_Feeds_Graph_Accounts {
         $raw_media_list = $this -> accounts[$username]['media']['data'];
         $media_list = array_slice($raw_media_list, 0, 5);
         return $media_list;
+    }
+
+    /**
+     * Returns full account data of an account
+     * @param string $username
+     * @return mixed
+     */
+    function get_account($username){
+        return $this -> accounts[$username];
     }
 
     /**

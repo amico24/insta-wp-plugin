@@ -71,7 +71,8 @@ $graph_groups = new Multi_Insta_Feeds_Graph_Groups;
         <tr>
             <th>Group Index</th>
             <th>Users</th>
-            <th>Shortcode</th>
+            <th>Shortcode (Recent Posts)</th>
+            <th>Shortcode (Accounts)</th>
             <th>Delete Group</th>
         </tr>
         <?php for ($grp = 0; $grp < $graph_groups->get_total_groups(); $grp++): ?>
@@ -84,7 +85,8 @@ $graph_groups = new Multi_Insta_Feeds_Graph_Groups;
                         echo $user . "<br>";
                     } ?>
                 </td>
-                <td><input type="text" value="[feed_display group=<?= $grp ?>]" readonly></td>
+                <td><input type="text" value="[feed_display group=<?= $grp ?> type=posts]" readonly></td>
+                <td><input type="text" value="[feed_display group=<?= $grp ?> type=accounts]" readonly></td>
                 <td>
                     <form method="post">
                         <input type="hidden" name="delete_group_2" id="delete_group_2" value="<?= $grp ?>" />

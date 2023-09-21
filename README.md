@@ -7,7 +7,7 @@ New version uses Instagram Graph API instead of Basic Display API
 
 This version is able to connect to business and creator accounts and display their posts. It wont work with personal accounts.
 
-Posts that have copyrighted material can't be displayed. Videos also show up as blank for now.
+Posts that have copyrighted material can't be displayed.
 
 Also `multi-insta-feeds-admin-functions.php` doesnt actually do anything lol i made it to try and have a general functions file to put constants and other stuff but i couldnt figure out how to get it to work with the boilerplate
 
