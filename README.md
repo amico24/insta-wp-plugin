@@ -75,7 +75,7 @@ Shortcode Fields:
   
 - `length` 
 
-        Description: Number of posts to display (in order of most recent) (for posts only)
+        Description: Maximum number of posts to display (in order of most recent) (for posts only)
   
         Possible Values: any int
   
