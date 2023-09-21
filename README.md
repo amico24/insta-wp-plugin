@@ -81,4 +81,4 @@ Shortcode Fields:
   
         Default: `5`
 Ex. 
-[feed_display] is the same as [feed_display type=accounts group=ALL length=5]
+[feed_display] is the same as [feed_display type=posts group=ALL length=5]
