@@ -127,7 +127,7 @@ class Multi_Insta_Feeds_Admin
 		//problem for future me
 		$a = shortcode_atts(
 			array(
-				'type' => 'accounts',
+				'type' => 'posts',
 				'group' => 'ALL', //ALL is default if no group is specified
 				'length' => '5' 
 			),
