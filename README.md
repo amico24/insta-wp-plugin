@@ -52,3 +52,33 @@ Also `multi-insta-feeds-admin-functions.php` doesnt actually do anything lol i m
 9. Create a group with your chosen accounts
 
 10. Copy/paste the shortcode of the group onto website.
+
+## Shortcode Guide
+
+Shortcode Fields:
+
+- `type`
+  
+        Description: What to display on the website
+  
+        Possible Values: `accounts` `posts`
+  
+        Default: `posts`
+  
+- `group`
+  
+        Description: Which group of accounts to display through their group index (ALL = all accounts)
+  
+        Possible Values: `ALL` `0` `1` `2` etc.
+  
+        Default: `ALL`
+  
+- `length` 
+
+        Description: Number of posts to display (in order of most recent) (for posts only)
+  
+        Possible Values: any int
+  
+        Default: `5`
+Ex. 
+[feed_display] is the same as [feed_display type=accounts group=ALL length=5]
