@@ -122,12 +122,14 @@ class Multi_Insta_Feeds_Admin
 	 * @param mixed $content
 	 * @return string
 	 */
-	public function feed_display($atts, $content = "")
-	{
+	public function feed_display($atts, $content = ""){
+		//this is so messy it might be good to move this to its own file
+		//problem for future me
 		$a = shortcode_atts(
 			array(
-				'type' => '',
-				'group' => ''
+				'type' => 'accounts',
+				'group' => 'ALL', //ALL is default if no group is specified
+				'length' => '5' 
 			),
 			$atts
 		);
@@ -135,16 +137,24 @@ class Multi_Insta_Feeds_Admin
 		$accounts = new Multi_Insta_Feeds_Graph_Accounts;
 		$post_list = array();
 
+		if($a['group']=='ALL'){
+			$accounts_to_display = $accounts -> get_accounts();
+		} elseif(!isset($a['group']) || $a['group'] >= $graph_groups->get_total_groups() || $a['group'] < 0){
+			$accounts_to_display = null;
+		} else {
+			$accounts_to_display = $graph_groups->get_user_list($a['group']);
+		}
+
 		//check if group exists
-		if (!isset($a['group']) || $a['group'] >= $graph_groups->get_total_groups() || $a['group'] < 0) {
+		if ($accounts_to_display == null) {
 			return '
 			<p>Group not found.</p>
 			';
 		} else {
 			if ($a['type'] == 'posts') {
 				//put 5 most recent posts on every account on $post_list
-				foreach ($graph_groups->get_user_list($a['group']) as $account) {
-					array_push($post_list, $accounts->get_media_list($account));
+				foreach ($accounts_to_display as $account) {
+					array_push($post_list, $accounts->get_media_list($account, $a['length']));
 				}
 				//flatten array
 				$post_list = array_merge(...$post_list);
@@ -159,9 +169,9 @@ class Multi_Insta_Feeds_Admin
 
 
 				//get 5 most recent posts
-				$post_list = array_slice($post_list, 0, 5);
+				$post_list = array_slice($post_list, 0, $a['length']);
 
-				//build html for posts (used foreach loop in case of < 5 posts)
+				//build html for posts
 				$html_snippet = "";
 				
 				foreach (array_keys($post_list) as $post_index) {
@@ -195,7 +205,7 @@ class Multi_Insta_Feeds_Admin
 				//build html for account
 				$html_snippet = "";
 
-				foreach ($graph_groups->get_user_list($a['group']) as $user) {
+				foreach ($accounts_to_display as $user) {
 					$bio = $accounts->get_account($user)['biography'] ?? ''; //in case of no bio
 					$html_snippet .= '
 					<a href="https://www.instagram.com/' . $user . '" target="_blank" style="text-decoration: none; color: initial;" >

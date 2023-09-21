@@ -63,6 +63,11 @@ $graph_groups = new Multi_Insta_Feeds_Graph_Groups;
     }
     ?>
 
+    <h4>Display Posts from All Accounts:</h4>
+    <input type="text" value="[feed_display type=posts]" readonly>
+
+    <h4>Display Profiles from All Accounts:</h4>
+    <input type="text" value="[feed_display type=accounts]" readonly>
 
     <hr>
 
@@ -71,8 +76,8 @@ $graph_groups = new Multi_Insta_Feeds_Graph_Groups;
         <tr>
             <th>Group Index</th>
             <th>Users</th>
-            <th>Shortcode (Recent Posts)</th>
-            <th>Shortcode (Accounts)</th>
+            <th>Recent Posts</th>
+            <th>Profiles</th>
             <th>Delete Group</th>
         </tr>
         <?php for ($grp = 0; $grp < $graph_groups->get_total_groups(); $grp++): ?>

@@ -75,11 +75,11 @@ class Multi_Insta_Feeds_Graph_Accounts {
      * @param string $username
      * @return mixed
      */
-    function get_media_list($username){
+    function get_media_list($username, $length = 5){
         //var_dump($this -> accounts);
         //die();
         $raw_media_list = $this -> accounts[$username]['media']['data'];
-        $media_list = array_slice($raw_media_list, 0, 5);
+        $media_list = array_slice($raw_media_list, 0, $length);
         return $media_list;
     }
 

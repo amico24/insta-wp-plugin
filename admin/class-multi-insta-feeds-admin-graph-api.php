@@ -20,13 +20,13 @@ class Multi_Insta_Feeds_Graph_API{
      * Client ID of Facebook app
      * @var string
      */
-    private $client_id = 'sample';
+    private $client_id = '1695938317479097';
 
     /**
      * App secret of Facebook app
      * @var string
      */
-    private $app_secret = 'sample';
+    private $app_secret = 'a8fa157edc5b93de14aca9deca215b5c';
 
     /**
      * Name of database entry that stores long-lived access token
