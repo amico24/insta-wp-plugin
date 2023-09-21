@@ -197,7 +197,7 @@ class Multi_Insta_Feeds_Admin
 				}
 
 				return '
-				<div style="display: flex; gap: 5px;">
+				<div style="display: flex; gap: 5px; flex-wrap:wrap;">
 					' . $html_snippet . '
 				</div>
 				';
@@ -220,7 +220,7 @@ class Multi_Insta_Feeds_Admin
 					';
 				}
 				return '
-				<div style="display: flex; gap: 5px; align-items:flex-start;">
+				<div style="display: flex; gap: 5px; align-items:flex-start; flex-wrap:wrap;">
 					' . $html_snippet . '
 				</div>
 				';
